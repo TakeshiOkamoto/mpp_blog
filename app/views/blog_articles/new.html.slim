@@ -1,0 +1,13 @@
+- provide(:title, '記事 - 新規登録')
+- provide(:submit, '登録する')
+
+p
+h1 新規登録 - 記事
+p
+
+= render 'form', blog_article: @blog_article
+
+br
+br
+=link_to("戻る", blog_articles_path)
+p

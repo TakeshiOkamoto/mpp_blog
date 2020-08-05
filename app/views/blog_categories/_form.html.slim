@@ -1,0 +1,18 @@
+- if @blog_category.errors.any?
+  #error_explanation.text-danger
+    ul
+      - @blog_category.errors.full_messages.each do |message|
+        li = message
+
+= form_with model: @blog_category, local: true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', id: 'blog_category_name'
+  .form-group
+    = f.label :description
+    = f.text_field :description, class: 'form-control', id: 'blog_category_description'
+  .form-group
+    = f.label :sort
+    = f.number_field :sort, class: 'form-control', id: 'blog_category_sort'
+  br 
+  = f.submit yield(:submit) , class: 'btn btn-primary'  

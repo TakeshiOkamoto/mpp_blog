@@ -1,0 +1,30 @@
+- provide(:title, '記事 - 表示')
+
+p
+h1 表示 - 記事
+p
+
+p
+  strong = BlogArticle.human_attribute_name(:blog_category_id) + " : "
+  = blog_get_category_from_id(@blog_article.blog_category_id)
+p
+  strong = BlogArticle.human_attribute_name(:title) + " : "
+  = @blog_article.title
+p
+  strong = BlogArticle.human_attribute_name(:keywords) + " : "
+  = @blog_article.keywords  
+p
+  strong = BlogArticle.human_attribute_name(:description) + " : "
+  = @blog_article.description
+  
+br  
+span style="color:green;" = "以下はプレビューとなります。"
+br
+= raw @blog_article.body
+br
+br
+br
+= link_to '編集', edit_blog_article_path(@blog_article)
+= ' | '
+= link_to '戻る', blog_articles_path
+p

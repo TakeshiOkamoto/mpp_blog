@@ -1,0 +1,92 @@
+- provide(:title, '画像')
+
+p
+h1 画像
+p
+
+= search_form_for @q, class: 'mb-5' do |f|
+  .form-group.row
+    .col-sm-10
+      = f.search_field :description_cont, class: 'form-control', placeholder: "検索したい画像の説明を入力します。"   
+  .form-group
+    = f.submit class: 'btn btn-outline-primary'
+
+= link_to '画像の新規登録', new_blog_image_path,class: 'btn btn-primary'  
+p  
+
+div.pc    
+  table.table.table-hover
+    thead.thead-default
+      tr
+        th style="width: 120px;" = BlogImage.human_attribute_name(:created_at)
+        th = "画像"
+    tbody
+      - @blog_images.each do |blog_image|
+        tr
+          td = blog_image.created_at.to_s.sub(/\+0900/, '').sub(/ /,'<br>').html_safe 
+          
+          - if blog_image.attachment.attached?
+              - url = rails_blob_path(blog_image.attachment) 
+              td 
+                = blog_image.description
+                br
+                div style="width:320px;"
+                  = raw '<img src="' +  url + '" class="img-fluid" />' 
+                  br
+                  = link_to '表示', blog_image 
+                  = raw "&nbsp;&nbsp;&nbsp;"   
+                  = link_to '編集', edit_blog_image_path(blog_image)
+                  = raw "&nbsp;&nbsp;&nbsp;"   
+                  = link_to '削除', blog_image, method: :delete, data: { confirm: '削除しても良いですか?' } 
+          - else
+            td
+              = blog_image.description
+              br
+              = "-"
+              br
+              = link_to '表示', blog_image 
+              = raw "&nbsp;&nbsp;&nbsp;"   
+              = link_to '編集', edit_blog_image_path(blog_image)
+              = raw "&nbsp;&nbsp;&nbsp;"   
+              = link_to '削除', blog_image, method: :delete, data: { confirm: '削除しても良いですか?' } 
+div.sp  
+  table.table.table-hover
+    thead.thead-default
+      tr
+        th = "画像"
+    tbody
+      - @blog_images.each do |blog_image|
+        tr
+          - if blog_image.attachment.attached?
+              - url = rails_blob_path(blog_image.attachment) 
+              td 
+                = blog_image.description
+                br
+                div style="width:280px;"
+                  = raw '<img src="' +  url + '" class="img-fluid" />' 
+                  br
+                  = link_to '表示', blog_image 
+                  = raw "&nbsp;&nbsp;&nbsp;"   
+                  = link_to '編集', edit_blog_image_path(blog_image)
+                  = raw "&nbsp;&nbsp;&nbsp;"   
+                  = link_to '削除', blog_image, method: :delete, data: { confirm: '削除しても良いですか?' } 
+          - else
+            td
+              = blog_image.description
+              br
+              = "-"
+              br
+              = link_to '表示', blog_image 
+              = raw "&nbsp;&nbsp;&nbsp;"   
+              = link_to '編集', edit_blog_image_path(blog_image)
+              = raw "&nbsp;&nbsp;&nbsp;"   
+              = link_to '削除', blog_image, method: :delete, data: { confirm: '削除しても良いですか?' }    
+          
+p  
+
+/ ページネーション
+.mb-3
+  = paginate @blog_images
+  = page_entries_info @blog_images
+  
+p  

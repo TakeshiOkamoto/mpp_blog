@@ -1,0 +1,39 @@
+- provide(:title, 'カテゴリ')
+
+p
+h1 カテゴリ
+p
+
+div.pc
+  table.table.table-hover
+    thead.thead-default
+      tr
+        th = BlogCategory.human_attribute_name(:name)
+        th = BlogCategory.human_attribute_name(:sort)
+        th[colspan="3"]
+    tbody
+      - @blog_categories.each do |blog_category|
+        tr
+          td = blog_category.name
+          td = blog_category.sort
+          td = link_to '表示', blog_category          
+          td = link_to '編集', edit_blog_category_path(blog_category)
+          td = link_to '削除', blog_category, method: :delete, data: { confirm: '削除しても良いですか?' }    
+div.sp
+  table.table.table-hover
+    thead.thead-default
+      tr
+        th = BlogCategory.human_attribute_name(:name)
+        th[colspan="3"]
+    tbody
+      - @blog_categories.each do |blog_category|
+        tr
+          td = blog_category.name
+          td = link_to '表示', blog_category          
+          td = link_to '編集', edit_blog_category_path(blog_category)
+          td = link_to '削除', blog_category, method: :delete, data: { confirm: '削除しても良いですか?' }  
+                       
+br
+= link_to 'カテゴリの新規登録', new_blog_category_path,class: 'btn btn-primary'  
+p
+  

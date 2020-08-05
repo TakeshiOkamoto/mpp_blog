@@ -1,0 +1,21 @@
+- provide(:title, 'カテゴリ - 表示')
+
+p
+h1 表示 - カテゴリ
+p
+
+p
+  strong = BlogCategory.human_attribute_name(:name) + " : "
+  = @blog_category.name
+p
+  strong = BlogCategory.human_attribute_name(:description) + " : "
+  = @blog_category.description
+p
+  strong = BlogCategory.human_attribute_name(:sort) + " : "
+  = @blog_category.sort
+  
+br
+= link_to '編集', edit_blog_category_path(@blog_category)
+= ' | '
+= link_to '戻る', blog_categories_path
+p

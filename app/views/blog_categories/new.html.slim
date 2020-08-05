@@ -1,0 +1,13 @@
+- provide(:title, 'カテゴリ - 新規登録')
+- provide(:submit, '登録する')
+
+p
+h1 新規登録 - カテゴリ
+p
+
+= render 'form', blog_category: @blog_category
+
+br
+br
+=link_to("戻る", blog_categories_path)
+p

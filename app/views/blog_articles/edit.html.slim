@@ -1,0 +1,15 @@
+- provide(:title, '記事 - 編集')
+- provide(:submit, '更新する')
+
+p
+h1 編集 - 記事
+p
+
+= render 'form', blog_article: @blog_article
+
+br
+br
+= link_to '表示', @blog_article
+= ' | '
+= link_to '戻る', blog_articles_path
+p

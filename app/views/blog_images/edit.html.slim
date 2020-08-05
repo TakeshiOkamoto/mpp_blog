@@ -1,0 +1,17 @@
+- provide(:title, '画像 - 編集')
+- provide(:submit, '更新する')
+
+p
+h1 編集 - 画像
+p
+
+= render 'form', blog_image: @blog_image
+
+br
+p style="color:green;" = "「説明」の編集のみ場合は画像を再設定する必要はありません。"
+br
+br
+= link_to '表示', @blog_image
+= ' | '
+= link_to '戻る', blog_images_path
+p

@@ -1,0 +1,15 @@
+- provide(:title, 'カテゴリ - 編集')
+- provide(:submit, '更新する')
+
+p
+h1 編集 - カテゴリ
+p
+
+= render 'form', blog_category: @blog_category
+
+br
+br
+= link_to '表示', @blog_category
+= ' | '
+= link_to '戻る', blog_categories_path
+p

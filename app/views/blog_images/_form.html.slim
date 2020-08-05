@@ -1,0 +1,16 @@
+- if @blog_image.errors.any?
+  #error_explanation.text-danger
+    ul
+      - @blog_image.errors.full_messages.each do |message|
+        li = message
+
+= form_with model: @blog_image, local: true do |f|
+  .form-group
+    = f.label :description, "説明 ※ファイル名でも可"
+    = f.text_field :description, class: 'form-control', id: 'blog_image_description'        
+  .form-group
+    = raw '<label for="blog_image_attachment">画像ファイル</label><br>' 
+    = f.file_field :attachment, accept: 'image/jpg,image/jpeg,image/png,image/gif' ,id:'blog_image_attachment'
+    
+  br 
+  = f.submit yield(:submit) , class: 'btn btn-primary'  

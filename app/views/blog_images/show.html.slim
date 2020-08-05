@@ -1,0 +1,37 @@
+- provide(:title, '画像 - 表示')
+
+p
+h1 表示 - 画像
+p
+
+- if @blog_image.attachment.attached?
+  - url = rails_blob_path(@blog_image.attachment) 
+  p
+    strong = BlogImage.human_attribute_name(:description) + " : "
+    = @blog_image.description
+  p  
+    strong = "タグ : "
+    br
+    = '<img src="' + url + '" />'
+    p
+    = raw '<span style="color:green;">上記の画像タグを記事のHTMLで使用します。</span>'
+      
+  = link_to URI.unescape(File.basename(url)),url 
+  br  
+  div style="width:320px;"
+    = raw '<img src="' +  url + '" class="img-fluid" />'   
+- else
+  - url = ""
+  p
+    strong = BlogImage.human_attribute_name(:description) + " : "
+    = @blog_image.description
+  p style="color:red;" = "画像が設定されていません。"
+
+
+  
+br  
+br
+= link_to '編集', edit_blog_image_path(@blog_image)
+= ' | '
+= link_to '戻る', blog_images_path
+p

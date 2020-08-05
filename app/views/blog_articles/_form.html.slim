@@ -1,0 +1,30 @@
+- if @blog_article.errors.any?
+  #error_explanation.text-danger
+    ul
+      - @blog_article.errors.full_messages.each do |message|
+        li = message
+
+= form_with model: @blog_article, local: true do |f|
+  .form-group
+    = raw '<label for="blog_article_blog_category_id">' + BlogArticle.human_attribute_name(:blog_category_id) +'</label><br>'    
+    - if @blog_article.blog_category_id.present?    
+      = f.select :blog_category_id, options_for_select(@blog_category_list,@blog_article.blog_category_id),include_blank: '選択して下さい。',id: 'blog_article_blog_category_id'
+    - else
+      = f.select :blog_category_id, options_for_select(@blog_category_list),include_blank: '選択して下さい。',id: 'blog_article_blog_category_id'
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control', id: 'blog_article_title'
+  .form-group
+    = f.label :keywords
+    = raw ' <span style="color:green;">※半角カンマで区切る</span>' 
+    = f.text_field :keywords, class: 'form-control', id: 'blog_article_keywords'
+  .form-group
+    = f.label :description
+    = f.text_field :description, class: 'form-control', id: 'blog_article_description'        
+  .form-group
+    = f.label :body
+    = raw ' <span style="color:green;">※HTMLで記述する</span>'     
+    = f.text_area :body, rows: 30, class: 'form-control', id: 'blog_article_body'
+
+  br 
+  = f.submit yield(:submit) , class: 'btn btn-primary'  

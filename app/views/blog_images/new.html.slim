@@ -1,0 +1,13 @@
+- provide(:title, '画像 - 新規登録')
+- provide(:submit, '登録する')
+
+p
+h1 新規登録 - 画像
+p
+
+= render 'form', blog_image: @blog_image
+
+br
+br
+=link_to("戻る", blog_images_path)
+p

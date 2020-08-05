@@ -1,0 +1,62 @@
+- provide(:title, '記事')
+
+p
+h1 記事
+p
+
+= search_form_for @q, class: 'mb-5' do |f|
+  .form-group.row
+    .col-sm-10
+      = f.search_field :title_cont, class: 'form-control', placeholder: "検索したい記事名を入力します。"   
+  .form-group
+    = f.submit class: 'btn btn-outline-primary'
+
+= link_to '記事の新規登録', new_blog_article_path,class: 'btn btn-primary'  
+p  
+
+div.pc    
+  table.table.table-hover
+    thead.thead-default
+      tr
+        th style="width: 120px;" = BlogArticle.human_attribute_name(:created_at)
+        th = BlogArticle.human_attribute_name(:title)
+        th[colspan="3" width="250"] 
+    tbody
+      - @blog_articles.each do |blog_article|
+        tr
+          td = blog_article.created_at.to_s.sub(/\+0900/, '').sub(/ /,'<br>').html_safe 
+          td 
+            = blog_article.title
+            br
+            .badge.badge-secondary = blog_get_category_from_id(blog_article.blog_category_id)
+
+          td = link_to '表示', blog_article          
+          td = link_to '編集', edit_blog_article_path(blog_article)
+          td = link_to '削除', blog_article, method: :delete, data: { confirm: '削除しても良いですか?' }       
+
+div.sp  
+  table.table.table-hover
+    thead.thead-default
+      tr
+        th = BlogArticle.human_attribute_name(:title)
+        th[colspan="3"]
+    tbody
+      - @blog_articles.each do |blog_article|
+        tr
+          td 
+            = blog_article.title
+            br
+            .badge.badge-secondary = blog_get_category_from_id(blog_article.blog_category_id)
+
+          td = link_to '表示', blog_article          
+          td = link_to '編集', edit_blog_article_path(blog_article)
+          td = link_to '削除', blog_article, method: :delete, data: { confirm: '削除しても良いですか?' }   
+          
+p  
+
+/ ページネーション
+.mb-3
+  = paginate @blog_articles
+  = page_entries_info @blog_articles
+  
+p  
