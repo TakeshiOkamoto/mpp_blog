@@ -10,8 +10,8 @@ blog = Blog
 ## 1. 環境
 ・Ruby 2.6.5  
 ・Rails 6.0.3.2 (2019/6/17版)  
-・Vue.js 2.6.11 
-・Vue.js 3.3.4  
+・Vue.js 2.6.11   
+・vue-router 3.3.4    
 ・MariaDB 10.2.2以上 (MySQL5.5以上でも可)  
  
 ## 2. インストール方法
